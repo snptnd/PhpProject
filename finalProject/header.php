@@ -8,6 +8,7 @@
         <script src="lib/bootstrap-3.2.0.min.js" type="text/javascript"></script>
         <link href="../CSS/finalProject.css" rel="stylesheet" type="text/css"/>
         <script src="js/functions.js" type="text/javascript"></script>
+        <script src="lib/jquery.watermark.min.js" type="text/javascript"></script>
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">

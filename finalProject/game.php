@@ -5,11 +5,17 @@ require("header.php");
 ?>
 <script>
     $(function () {
+        $("#regEmail").watermark("Email Address");
+        $("#regPassword").watermark("Password");
+        $("#regAge").watermark("Age");
         document.body.style.background = "#000000";
         $("#registerLink").click(function () {
             $("#registerContainer").toggle();
             $("#loginContainer").toggle();
         });
+        function validateFormOnSubmit(myForm){
+            //myForm.
+        }
     });
 </script>
 
@@ -69,21 +75,28 @@ require("header.php");
                 <div class="row">
                     <p style="font-size: 1.5vw; margin: 1%;">Please enter your details below to register.</p>
                 </div>
-                <form method="post" action="register.php" name="registerform" id="registerform">
+                <form method="post" action="#" onsubmit="return validateFormOnSubmit(this);" name="registerform" id="registerform">
                     <div class="row centerDiv"> 
-                        <div class="col-xs-2">
-                            <label for="email">Email:</label>
-                        </div>
                         <div class="col-xs-2"> 
-                            <input type="text" name="email" id="email" />
+                            <input type="text" name="email" id="regEmail" />
                         </div>
                     </div>
                     <div class="row centerDiv"> 
                         <div class="col-xs-2">
-                            <label for="password">Password:</label>
+                            <input type="password" name="password" id="regPassword" />
+                        </div>
+                    </div>
+                    <div class="row centerDiv"> 
+                        <div class="col-xs-2">
+                            <input type="text" name="regAge" id="regAge" />
+                        </div>
+                    </div>
+                    <div class="row centerDiv"> 
+                        <div class="col-xs-8" style="width: 250px !important; text-align: left;">
+                            <input type="checkbox" checked="checked" name="regSendNews" id="regSendNews" /> 
                         </div>
                         <div class="col-xs-2">
-                            <input type="password" name="password" id="password" />
+                            <label for="regAge">I would like to receive news regarding the game.</label>
                         </div>
                     </div>
                     <div class="row centerDiv"> 
