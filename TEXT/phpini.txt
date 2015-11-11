@@ -1,0 +1,4 @@
+The php.ini file is a configuration file. It is read every time PHP starts. 
+Many directives can be enabled, disabled or changed using this file.
+Directives can allow you to turn on error tracking, change how boolean values
+are handled and how code is handled in general.

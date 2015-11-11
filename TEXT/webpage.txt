@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <?php
+        echo '<h1>Seperate web page</h1>';
+        echo '<div>This is text in a div tag</div>';
+        ?>
+    </body>
+</html>
