@@ -1,0 +1,65 @@
+<?php
+require("classes/dbutils.php");
+$pageTitle = "Game";
+require("header.php");
+?>
+
+
+<div style="margin: auto; text-align: center;">
+    <h1>Forum (GUI unfinished)</h1>
+</div>
+
+
+<?php
+if (isset($_GET["topicID"])) {
+    if (isset($_GET["threadID"])) {
+        if (isset($_GET["postID"])) {
+            
+        } else {
+            $sql = "SELECT postID, FK_threadID, email, displayName, post.timeS, content FROM post LEFT JOIN user ON post.FK_userID = user.userID WHERE FK_threadID = " . $_GET["threadID"] . ";";
+            $db = new DbUtilities;
+            $collectionList = $db->getDataset($sql);
+            foreach ($collectionList as &$row) {
+
+                echo('<div class="row" style="border: 1px solid red; outline: red solid thin; width: 80%; margin: auto;">');
+                echo('<p>' . $row["displayName"] . '</p>');
+                echo('</div>');
+                echo('<div class="row" style="border: 1px solid red; outline: red solid thin; width: 80%; margin: auto; margin-bottom: 25px;">');
+                echo('<p>' . $row["content"] . '</p>');
+                echo('</div>');
+            }
+        }
+    } else {
+        $sql = "SELECT * FROM thread WHERE FK_topicID=" . $_GET["topicID"] . ";";
+        $db = new DbUtilities;
+        $collectionList = $db->getDataset($sql);
+        foreach ($collectionList as &$row) {
+
+            echo('<div class="row" style="border: 1px solid red; outline: red solid thin; width: 80%; margin: auto;">');
+            echo('<a href="' . 'forum.php?topicID=' . $row["topicID"] . '&threadID=' . $row["threadID"] . '">' . '<p>' . $row["header"] . '</p>' . '</a>');
+            echo('</div>');
+            echo('<div class="row" style="border: 1px solid red; outline: red solid thin; width: 80%; margin: auto; margin-bottom: 25px;">');
+            echo('<p>' . $row["description"] . '</p>');
+            echo('</div>');
+        }
+    }
+} else {
+    $sql = "SELECT * FROM topic";
+    $db = new DbUtilities;
+    $collectionList = $db->getDataset($sql);
+    foreach ($collectionList as &$row) {
+
+        echo('<div class="row" style="border: 1px solid red; outline: red solid thin; width: 80%; margin: auto;">');
+        echo('<a href="' . 'forum.php?topicID=' . $row["topicID"] . '">' . '<p>' . $row["header"] . '</p>' . '</a>');
+        echo('</div>');
+        echo('<div class="row" style="border: 1px solid red; outline: red solid thin; width: 80%; margin: auto; margin-bottom: 25px;">');
+        echo('<p>' . $row["description"] . '</p>');
+        echo('</div>');
+    }
+}
+?>
+
+
+<?php
+require("footer.php");
+?>

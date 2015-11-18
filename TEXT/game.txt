@@ -64,8 +64,7 @@ require("header.php");
 
                 promise.success(function (data) {
                     var text = data.replace(/(\r\n|\n|\r)/gm, "");
-                    //alert(text);
-                    //location.reload();
+                    alert("Account Created");
                     if (text == "VALID") {
                         $("#loggedInContainer").show();
                         $("#registerContainer").hide();
@@ -141,8 +140,8 @@ require("header.php");
         } else {
             ?>
 
-            <div class="container-fluid centerMe" id="loggedInContainer" style="font-size: 2vw">
-                Logged in (This is where the game will load to)
+            <div class="container-fluid centerMe" id="loggedInContainer">
+                Logged in
             </div>
 
             <div class="container-fluid centerMe" id="loginContainer">

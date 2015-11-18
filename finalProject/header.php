@@ -42,7 +42,7 @@
                         <li class="divider-vertical"></li>
                         <li><a href="#">Leader Boards</a></li>
                         <li class="divider-vertical"></li>
-                        <li><a href="#">Forum</a></li>
+                        <li><a href="forum.php">Forum</a></li>
                         <li class="divider-vertical"></li>
                         <li class="playButton" id="playButton"><a class="lastPlay" href="game.php">Play</a></li>
                     </ul>

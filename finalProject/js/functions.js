@@ -13,15 +13,23 @@ function validateForm(theForm) {
     var email = theForm.email;
     var password = theForm.password;
 }
-function newUser(email, password, sendNews, age) {
+function logIn(email, password){
     var userData = {};
     userData.email = email;
+    userData.password = password;
+
+    return $.post("login.php", userData).done(function (data) {
+        console.log("Data Loaded: " + data);
+    });
+}
+function newUser(email, displayName, password, sendNews, age) {
+    var userData = {};
+    userData.email = email;
+    userData.displayName = displayName;
     userData.password = password;
     userData.sendNews = sendNews;
     userData.age = age;
     userData.userID = guid();
-
-    console.log("email: " + userData.email + " password: " + userData.password + " sendNews: " + userData.sendNews + " age: " + userData.age);
 
     $.post("newuser.php", userData).done(function (data) {
         console.log("Data Loaded: " + data);

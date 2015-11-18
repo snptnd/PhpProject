@@ -43,7 +43,7 @@ require("header.php");
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div><!-- /.carousel -->
+    </div><!-- /carousel -->
 
 
 

@@ -1,3 +1,6 @@
+body{
+    background-image: linear-gradient(rgb(0, 0, 0), rgb(37, 0, 0) 40%, rgb(16, 6, 6)) !important;
+}
 nav.navbar.navbar-default {
     background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25) 40%, #292929) !important;
     border-color: #000000 !important;
@@ -115,7 +118,7 @@ button.navbar-toggle {
 }
 .wrapper {
     color: #AF0000 !important;
-    width: 80%;
+    width: 100%;
     /* whatever width you want */
     display: inline-block;
     position: relative;
@@ -144,10 +147,13 @@ button.navbar-toggle {
     font-size: 1.3vw;
 }
 .reqSize {
-    width: 38%;
+    width: 34%;
 }
 .validateVis {
     visibility: hidden;
+    text-align: left;
+    width: 66%;
+    font-weight: bold;
 }
 div#newsLbl {
     width: 28vw;
@@ -163,7 +169,7 @@ div#newsLbl {
     width: 70%;
     display:inline-block;
     margin: 1%;
-    margin-top: 7%;
+    margin-top: 0;
 }
 .hideMe{
     display: none;
@@ -189,4 +195,52 @@ input#login, input#register {
     color: #000000;
     border: 2px solid #791212;
     font-weight: bold;
+}
+tr.topRow{
+    background-image: linear-gradient(rgb(41, 41, 41), rgb(31, 28, 28) 40%, #292929);
+    color: #AF0000;
+    height: 4vw;
+    font-size: 1.8vw;
+}
+table.tableCenter{
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+    border-collapse: collapse; 
+}
+td.topicCell{
+    width: 20%;
+    padding-left: 10px;
+}
+td.latestThCell{
+    width: 30%;
+}
+td.threadsCountCell{
+    width: 10%
+}
+td.postsCountCell{
+    width: 10%;
+}
+tr.rowStyle1{
+    height: 30px;
+    color: #FFFFFF;
+    background-color: #383838;
+    
+}
+tr.rowStyle2{
+    height: 30px;
+    color: #FFFFFF;
+    background-color: #313131;
+    
+}
+a.forumLink {
+    margin-left: 15px;
+    color: #FFFFFF;
+    text-decoration: none !important;
+}
+a.forumLink:hover {
+    color: #FF0000 !important;
+    text-decoration: none !important;
 }
