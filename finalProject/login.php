@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("base.php"); 
 require("classes/dbutils.php");
 
@@ -7,8 +8,7 @@ $password = $_POST["password"];
 
 $hashPass = md5($password);
 
-
-$sql = "SELECT userID,email,displayName FROM user WHERE email='$email' AND passW='$hashPass';";
+$sql = "SELECT userID,email,displayName,type FROM user WHERE email='$email' AND passW='$hashPass';";
 $db = new DbUtilities;
 //$db->getDatasetWithParams($sql, "ss", array($email, $hashPass));
 //echo($db->getDataset($sql));
@@ -18,8 +18,9 @@ if(count($collectionList) > 0){
 		$_SESSION["userID"] = $row["userID"];
 		$_SESSION["email"] = $row["email"];
 		$_SESSION["displayName"] = $row["displayName"];
+                $_SESSION["type"] = $row["type"];
                 echo("VALID");
-	}	
+        }
 	
 	// print_r($_SESSION);
 	// Change this to redirect to whatever page is the first landing page for the application
@@ -28,6 +29,7 @@ else{
 	$_SESSION["userID"] = "INVALID";
 	$_SESSION["email"] = "INVALID";
 	$_SESSION["displayName"] = "INVALID";
+        $_SESSION["type"] = "INVALID";
         echo("INVALID");
 	// Authentication failed - redirect to auth failed page
 	// You need to update that page

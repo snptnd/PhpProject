@@ -2,9 +2,13 @@
 require("classes/dbutils.php");
 $pageTitle = "Game";
 require("header.php");
+session_start();
 ?>
 <script>
     $(function () {
+        var numAttempt = 0;
+        var numA = 0;
+        $("#deleteMe").hide();
         $("#loggedInContainer").hide();
         $("#regEmail").watermark("Email Address");
         $("#regPassword").watermark("Password");
@@ -13,12 +17,15 @@ require("header.php");
 
         $("#logEmail").watermark("Email Address");
         $("#logPassword").watermark("Password");
-
-        document.body.style.background = "#000000";
         $("#registerLink").click(function () {
             $("#registerContainer").toggle();
             $("#loginContainer").toggle();
         });
+
+
+
+
+
         $("#loginForm").submit(function () {
             var errors = 0;
             var logEmail = document.getElementById("logEmail").value;
@@ -30,14 +37,23 @@ require("header.php");
             if (errors > 0) {
                 return false;
             } else {
-                var promise = logIn(logEmail, logPass);
+                var attempt = logIn(logEmail, logPass);
 
-                promise.success(function (data) {
+                attempt.success(function (data) {
                     var text = data.replace(/(\r\n|\n|\r)/gm, "");
-                    if (text == "VALID") {
-                        $("#loggedInContainer").show();
-                        $("#registerContainer").hide();
-                        $("#loginContainer").hide();
+                    numAttempt += 1;
+                    numA = 4 - numAttempt;
+                    if (numAttempt < 4) {
+                        if (text == "VALID") {
+
+                            $("#loggedInContainer").show();
+                            $("#registerContainer").hide();
+                            $("#loginContainer").hide();
+                        } else {
+                            alert("Incorrect Credintials Provided\n" + numA + " more attempt(s) before lockout.");
+                        }
+                    } else {
+                        alert("Access Denied.\nContact an Administrator");
                     }
                 });
                 return false;
@@ -75,15 +91,9 @@ require("header.php");
                 return false;
             }
         });
-        function validateEmail(email) {
-            var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-            if (!pattern.test(email)) {
-                $(".hookEmail").css("visibility", "visible");
-                return 1;
-            } else {
-                $(".hookEmail").css("visibility", "hidden");
-                return 0;
-            }
+        function fillCharList() {
+            var jsonData = getCharsJSONstring();
+
         }
         function validateDisplayName(displayName) {
             if (displayName == null || displayName == "") {
@@ -108,15 +118,6 @@ require("header.php");
                 return 0;
             }
         }
-        function validatePass(pass) {
-            if (pass == null || pass == "") {
-                $("#regLogPassword").css("visibility", "visible");
-                return 1;
-            } else {
-                $("#regLogPassword").css("visibility", "hidden");
-                return 0;
-            }
-        }
         function validateAge(age) {
             if (isNaN(age) || age == null || age == "") {
                 $(".hookAge").css("visibility", "visible");
@@ -126,6 +127,9 @@ require("header.php");
                 return 0;
             }
         }
+
+
+
     });</script>
 
 <div class="wrapper">
@@ -141,9 +145,14 @@ require("header.php");
         } else {
             ?>
 
-            <div class="container-fluid centerMe" id="loggedInContainer" style="font-size: 2vw">
-                Logged in (This is where the game will load to)
+            <div class="container-fluid centerMe" id="loggedInContainer">
+                <?php
+                //require("characterCreation.php");
+                require('gameLayout.php');
+                ?>
             </div>
+
+            <!-- this is for logging in -->
 
             <div class="container-fluid centerMe" id="loginContainer">
                 <div class ="block">
@@ -154,30 +163,30 @@ require("header.php");
                         <p style="font-size: 1.5vw; margin: 1%;">Please either login below, or <a href="#" id="registerLink">click here to register</a>.</p>
                     </div>
                     <form method="post" name="loginForm" id="loginForm">
-                        <div class="row centerDiv"> 
-                            <div class="col-xs-2 reqSize"> 
+                        <div class="row centerDiv">
+                            <div class="col-xs-2 reqSize">
                                 <input type="text" name="logEmail" id="logEmail" />
                             </div>
-                            <div class="col-xs-2 validateVis hookEmail" id="valLogEmail"> 
+                            <div class="col-xs-2 validateVis hookEmail" id="valLogEmail">
                                 <label id="regLogEmail">Required</label>
                             </div>
                         </div>
-                        <div class="row centerDiv"> 
+                        <div class="row centerDiv">
                             <div class="col-xs-2 reqSize">
                                 <input type="password" name="password" id="logPassword" />
                             </div>
-                            <div class="col-xs-2 validateVis hookPassword" id="valLogPassword"> 
+                            <div class="col-xs-2 validateVis hookPassword" id="valLogPassword">
                                 <label id="regLogPassword">Required</label>
                             </div>
                         </div>
-                        <div class="row centerDiv"> 
+                        <div class="row centerDiv">
                             <div class="col-xs-2">
                                 <input type="submit" name="login" id="login" value="Login" />
                             </div>
                         </div>
                     </form>
 
-                </div>      
+                </div>
             </div>
 
             <!-- this is for registration -->
@@ -188,7 +197,7 @@ require("header.php");
                         <h1 class="gameHeader">Register</h1>
                     </div>
                     <div class="row">
-                        <p style="    font-size: 1.8vw; margin: 1%; font-weight: bold;">Please enter your details below to register.</p>
+                        <p style="font-size: 1.8vw; margin: 1%; font-weight: bold;">Please enter your details below to register.</p>
                     </div>
                     <form method="post" name="registerForm" id="registerForm">
                         <div class="row centerDiv"> 

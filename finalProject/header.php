@@ -1,3 +1,4 @@
+
 <html>
     <head>
         <title><?php echo($pageTitle); ?></title>
@@ -9,6 +10,7 @@
         <link href="../CSS/finalProject.css" rel="stylesheet" type="text/css"/>
         <script src="js/functions.js" type="text/javascript"></script>
         <script src="lib/jquery.watermark.min.js" type="text/javascript"></script>
+    </head>
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
