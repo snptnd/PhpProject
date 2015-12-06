@@ -166,5 +166,17 @@ h1{
 		order: 3;	
         }
 }
+textarea.inBox {
+    width: 100%;
+}
+input.phBox{
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+body {
+    min-width: 648px;
+    font-size: 12pt;
+}
 
   

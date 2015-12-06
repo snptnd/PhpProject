@@ -1,5 +1,12 @@
 body{
-    background-image: linear-gradient(rgb(0, 0, 0), rgb(37, 0, 0) 40%, rgb(16, 6, 6)) !important;
+    background: transparent;
+}
+html { 
+  background: linear-gradient(rgb(0, 0, 0), rgb(37, 0, 0) 40%, rgb(16, 6, 6)) no-repeat center center fixed !important; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 nav.navbar.navbar-default {
     background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25) 40%, #292929) !important;
@@ -139,6 +146,14 @@ button.navbar-toggle {
     right: 0;
     left: 0;
     background-color: transparent;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+div#loggedInContainer {
+    font-size: 2vw;
+    display: block;
+    margin: 0;
+    padding: 0;
 }
 .centerDiv{
     padding-bottom: 1%;
@@ -200,15 +215,27 @@ tr.topRow{
     background-image: linear-gradient(rgb(41, 41, 41), rgb(31, 28, 28) 40%, #292929);
     color: #AF0000;
     height: 4vw;
-    font-size: 1.8vw;
+    font-size: 16px;
+    white-space: nowrap;
 }
 table.tableCenter{
+    padding: 0;
+    width: 100%;
+    -moz-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    margin: auto;
+    overflow: hidden;
+    border-collapse: collapse; 
+    display:block;
+}
+.tblHolder{
     width: 80%;
     margin: auto;
     margin-top: 20px;
-    border-radius: 15px 15px 0 0;
-    overflow: hidden;
-    border-collapse: collapse; 
+    min-width: 280px;
 }
 td.topicCell{
     width: 20%;
@@ -243,4 +270,126 @@ a.forumLink {
 a.forumLink:hover {
     color: #FF0000 !important;
     text-decoration: none !important;
+}
+.charButton{
+    color: black;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    font-size: 2vw;
+    background-color: #900E0E;
+    border-radius: 5px;
+    width: 50%;
+    margin: auto;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+.charButton:hover{
+    color: black;
+    background-color: #E60606;
+}
+.postButton:hover {
+        background-image: linear-gradient(rgb(47, 39, 39), rgb(8, 8, 8) 40%, #2F0F0F);
+        color: #B50707;
+}
+.postButton {
+    white-space: nowrap;
+    /* margin-left: 5vw; */
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    width: 110px;
+    //padding-left: 2vw;
+    //padding-right: 6.7vw;
+    border-radius: 8px 8px 8px 8px;
+    background-image: linear-gradient(rgb(41, 41, 41), rgb(31, 28, 28) 40%, #2F2929);
+    color: #9E0000;
+    font-weight: bold;
+    font-size: 16px;
+    /* line-height: 4vw; */
+    margin-bottom: 5px;
+    text-align: center;
+}
+.postThreadButton:hover {
+    background-image: linear-gradient(rgb(47, 39, 39), rgb(8, 8, 8) 40%, #2F0F0F);
+    color: #B50707;
+}
+.postThreadButton {
+    text-align: center;
+    white-space: nowrap;
+    /* margin-left: 5vw; */
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    width: 180px;
+    /* padding-right: 1vw; */
+    border-radius: 8px 8px 8px 8px;
+    background-image: linear-gradient(rgb(41, 41, 41), rgb(31, 28, 28) 40%, #2F2929);
+    color: #9E0000;
+    font-weight: bold;
+    font-size: 16px;
+    /* line-height: 4vw; */
+    margin-bottom: 5px;
+}
+.row.top{
+    margin-left: 10px;
+}
+button.btn.btn-info.loginButton {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-image: linear-gradient(rgb(41, 41, 41), rgb(31, 28, 28) 40%, #2F2929);
+    background-repeat: no-repeat;
+    color: #9E0000;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background-color: transparent !important;
+    padding: 0 15px 0 15px;
+    border-radius: 8px 8px 8px 8px;
+    
+}
+button.btn.btn-info.loginButton:hover {
+    background-image: linear-gradient(rgb(47, 39, 39), rgb(8, 8, 8) 40%, #2F0F0F);
+    color: #B50707;
+    background-repeat: no-repeat;
+}
+button.btn.btn-info.loginButton:focus {
+    outline: 0;
+}
+.postBox{
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+}
+.txtField{
+    width: 100%;
+    border-radius: 15px;
+    border-color: #000000;
+    color: #FFFFFF;
+    background-color: #383838;
+    margin: auto;
+}
+.txtField:focus{
+    outline: 0;
+    border-color: #7D0000;
+}
+button.btn.btn-info.postButton{
+    white-space: nowrap;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-image: linear-gradient(rgb(41, 41, 41), rgb(31, 28, 28) 40%, #2F2929);
+    background-repeat: no-repeat;
+    color: #9E0000;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background-color: transparent !important;
+    padding: 0 15px 0 7px;
+    border-radius: 8px 8px 8px 8px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+button.btn.btn-info.postButton:hover{
+    background-image: linear-gradient(rgb(47, 39, 39), rgb(8, 8, 8) 40%, #2F0F0F);
+    color: #B50707;
+    background-repeat: no-repeat;
+}
+button.btn.btn-info.postButton:focus{
+    outline: 0;
+}
+.modal-content{
+    
 }

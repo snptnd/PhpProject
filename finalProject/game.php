@@ -5,11 +5,27 @@ require("header.php");
 session_start();
 ?>
 <script>
+    // Set aspect ratio of #my_div
+        var map_ratio = 0.75;
+        var message_ratio = 0.25;
+        var button_ratio = 0.20;
+        var multi_ratio = 2.5;
+        var hpMp_ratio = 0.10;
+        var will_ratio = 0.10;
+        var player_ratio = 1.301;
+        
+        var $map_div;
+        var $message_div;
+        var $button_div;
+        var $multi_div;
+        var $hpMp_div;
+        var $will_div;
+        var $player_div;
+    
     $(function () {
         var numAttempt = 0;
         var numA = 0;
-        $("#deleteMe").hide();
-        $("#loggedInContainer").hide();
+        $("#characterCreation").hide();
         $("#regEmail").watermark("Email Address");
         $("#regPassword").watermark("Password");
         $("#regDisplayName").watermark("Display Name");
@@ -23,8 +39,30 @@ session_start();
         });
 
 
+        
 
+        // Store the jQuery object for future reference
+        $map_div = jQuery("#mapScreen");
+        $message_div = jQuery(".messageScreen");
+        $button_div = jQuery(".buttonScreen");
+        $multi_div = jQuery(".multiScreen");
+        $hpMp_div = jQuery(".hpMpScreen");
+        $will_div = jQuery(".willScreen");
+        $player_div = jQuery(".playerScreen");
 
+        // initial resize
+        $(document).ready(function () {
+            $map_div.height($map_div.width() * map_ratio);
+            $message_div.height($message_div.width() * message_ratio);
+            $button_div.height($button_div.width() * button_ratio);
+            $multi_div.height($multi_div.width() * multi_ratio);
+            $hpMp_div.height($hpMp_div.width() * hpMp_ratio);
+            $will_div.height($will_div.width() * will_ratio);
+            $player_div.height($player_div.width() * player_ratio);
+
+            //$("#loggedInContainer").hide();
+            //$("#gameLayout").hide();
+        });
 
         $("#loginForm").submit(function () {
             var errors = 0;
@@ -49,6 +87,8 @@ session_start();
                             $("#loggedInContainer").show();
                             $("#registerContainer").hide();
                             $("#loginContainer").hide();
+                            findChar();
+
                         } else {
                             alert("Incorrect Credintials Provided\n" + numA + " more attempt(s) before lockout.");
                         }
@@ -86,6 +126,7 @@ session_start();
                         $("#loggedInContainer").show();
                         $("#registerContainer").hide();
                         $("#loginContainer").hide();
+                        findChar();
                     }
                 });
                 return false;
@@ -130,7 +171,19 @@ session_start();
 
 
 
-    });</script>
+    });
+
+    jQuery(window).resize(function () {
+        $map_div.height($map_div.width() * map_ratio);
+        $message_div.height($message_div.width() * message_ratio);
+        $button_div.height($button_div.width() * button_ratio);
+        $multi_div.height($multi_div.width() * multi_ratio);
+        $hpMp_div.height($hpMp_div.width() * hpMp_ratio);
+        $will_div.height($will_div.width() * will_ratio);
+        $player_div.height($player_div.width() * player_ratio);
+    });
+
+</script>
 
 <div class="wrapper">
     <div class="whiteBack">
@@ -145,10 +198,10 @@ session_start();
         } else {
             ?>
 
-            <div class="container-fluid centerMe" id="loggedInContainer">
+            <div class="container-fluid" id="loggedInContainer">
                 <?php
-                //require("characterCreation.php");
                 require('gameLayout.php');
+                require("characterCreation.php");
                 ?>
             </div>
 
@@ -157,7 +210,7 @@ session_start();
             <div class="container-fluid centerMe" id="loginContainer">
                 <div class ="block">
                     <div class="row">
-                        <h1 class="gameHeader">Login</h1>
+                        <h1 class="gameHeader centerMe">Login</h1>
                     </div>
                     <div class="row">
                         <p style="font-size: 1.5vw; margin: 1%;">Please either login below, or <a href="#" id="registerLink">click here to register</a>.</p>

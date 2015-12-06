@@ -28,6 +28,10 @@
     }
 
     .gender-col {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
         cursor: pointer;
         float: left;
         /*fix for  buggy browsers*/
@@ -60,6 +64,10 @@
 
     td.plus,
     td.minus {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
         cursor: pointer;
         background: #291616;
         width: 2vw !important;
@@ -159,6 +167,23 @@
             }
         });
 
+        $("#wisdomMinus").click(function () {
+            if (parseInt($('#wisdomPoints').text()) <= 1) {
+            } else {
+                $('#wisdomPoints').text(parseInt($('#wisdomPoints').text()) - 1);
+                points += 1;
+                setPointString();
+            }
+        });
+        $("#wisdomPlus").click(function () {
+            if (points <= 0) {
+            } else {
+                $('#wisdomPoints').text(parseInt($('#wisdomPoints').text()) + 1);
+                points -= 1;
+                setPointString();
+            }
+        });
+
         $("#hpMinus").click(function () {
             if (parseInt($('#hpPoints').text()) <= 1) {
             } else {
@@ -236,6 +261,9 @@
             } else if (points != 0) {
                 alert("You must alocate all of your points to continue!");
             } else {
+                createNewChar();
+                $("#characterCreation").hide();
+                findChar();
             }
         });
 
@@ -245,7 +273,7 @@
 
 </head>
 <body>
-    <div id="deleteMe">
+    <div id="characterCreation">
         <div class="create-col">
             <h1>
                 Character Creation
@@ -310,6 +338,20 @@
                         -
                     </td>
                     <td id="intellectPlus" class="plus">
+                        +
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Wisdom:
+                    </td>
+                    <td id="wisdomPoints">
+                        5
+                    </td>
+                    <td id="wisdomMinus" class="minus">
+                        -
+                    </td>
+                    <td id="wisdomPlus" class="plus">
                         +
                     </td>
                 </tr>

@@ -79,7 +79,18 @@
         width:auto;
         clear:both;
     }
+    .g-col:active {
+        background-color: black;
+    }
+    .g-col:hover {
+        background-color: #8A3838;
+    }
     .g-col{
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        cursor: pointer;
         float:left;/*fix for  buggy browsers*/
         display:table-column;         
         width:33%;  
@@ -96,56 +107,14 @@
 
 
 
-<script type="text/javascript">//<![CDATA[
-    window.onload = function () {
-
-        // Set aspect ratio of #my_div
-        var map_ratio = 0.75;
-        var message_ratio = 0.25;
-        var button_ratio = 0.20;
-        var multi_ratio = 2.5;
-        var hpMp_ratio = 0.10;
-        var will_ratio = 0.10;
-        var player_ratio = 1.301;
-
-        // Store the jQuery object for future reference
-        var $map_div = jQuery("#mapScreen");
-        var $message_div = jQuery(".messageScreen");
-        var $button_div = jQuery(".buttonScreen");
-        var $multi_div = jQuery(".multiScreen");
-        var $hpMp_div = jQuery(".hpMpScreen");
-        var $will_div = jQuery(".willScreen");
-        var $player_div = jQuery(".playerScreen");
-
-
-        // initial resize
-        $(document).ready(function () {
-            $map_div.height($map_div.width() * map_ratio);
-            $message_div.height($message_div.width() * message_ratio);
-            $button_div.height($button_div.width() * button_ratio);
-            $multi_div.height($multi_div.width() * multi_ratio);
-            $hpMp_div.height($hpMp_div.width() * hpMp_ratio);
-            $will_div.height($will_div.width() * will_ratio);
-            $player_div.height($player_div.width() * player_ratio);
-        });
-
-        // Resize on browser resize
-        jQuery(window).resize(function () {
-            $map_div.height($map_div.width() * map_ratio);
-            $message_div.height($message_div.width() * message_ratio);
-            $button_div.height($button_div.width() * button_ratio);
-            $multi_div.height($multi_div.width() * multi_ratio);
-            $hpMp_div.height($hpMp_div.width() * hpMp_ratio);
-            $will_div.height($will_div.width() * will_ratio);
-            $player_div.height($player_div.width() * player_ratio);
-        });
-    };
+<script type="text/javascript">
+    
 
 
 
 </script>
 
-<div class="noWrap">
+<div class="noWrap" id="gameLayout">
     <div class="col-xs-2 leftScreen">
         <div class="row buttonScreen g-table" style="height: 23.6px;">
             <div class="g-row">
@@ -169,10 +138,10 @@
     </div>
     <div class="col-xs-4 rightScreen">
         <div class="row hpMpScreen" style="height: 24.6px;">
-            hp: mp:
+            HP: Stamina:
         </div>
         <div class="row willScreen" style="height: 24.6px;">
-            will:
+            MP: Will:
         </div>
         <div class="row playerScreen" style="height: 320.046px;">
             player

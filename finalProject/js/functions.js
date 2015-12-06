@@ -15,42 +15,54 @@ var charCurWill = 0;
 var charExperience = 0;
 var charLevel = 1;
 
-
 function findChar() {
     $.post("findChar.php").done(function (data) {
         var jsonData = JSON.parse(data);
-        console.log(JSON.parse(data));
-        var charFound = jsonData.length;
-        console.log(charFound);
-        if (jsonData.character.length > 0) {
-            var charPlaceID = jsonData.character[0].placeID;
-            var charName = jsonData.character[0].name;
-            var charGender = jsonData.character[0].gender;
-            var charAgility = jsonData.character[0].agility;
-            var charStrength = jsonData.character[0].strength;
-            var charIntellect = jsonData.character[0].intellect;
-            var charMaxHP = jsonData.character[0].maxHP;
-            var charCurHP = jsonData.character[0].curHP;
-            var charMaxMP = jsonData.character[0].maxMP;
-            var charCurMP = jsonData.character[0].curMP;
-            var charMaxStamina = jsonData.character[0].maxStamina;
-            var charCurStamina = jsonData.character[0].curStamina;
-            var charMaxWill = jsonData.character[0].maxWill;
-            var charCurWill = jsonData.character[0].curWill;
-            var charExperience = jsonData.character[0].experience;
-            var charLevel = jsonData.character[0].level;
+        var charFound = jsonData.character.length;
+        if (charFound > 0) {
+            charPlaceID = jsonData.character[0].placeID;
+            charName = jsonData.character[0].name;
+            charGender = jsonData.character[0].gender;
+            charAgility = jsonData.character[0].agility;
+            charStrength = jsonData.character[0].strength;
+            charIntellect = jsonData.character[0].intellect;
+            charWisdom = jsonData.character[0].wisdom;
+            charMaxHP = jsonData.character[0].maxHP;
+            charCurHP = jsonData.character[0].curHP;
+            charMaxMP = jsonData.character[0].maxMP;
+            charCurMP = jsonData.character[0].curMP;
+            charMaxStamina = jsonData.character[0].maxStamina;
+            charCurStamina = jsonData.character[0].curStamina;
+            charMaxWill = jsonData.character[0].maxWill;
+            charCurWill = jsonData.character[0].curWill;
+            charExperience = jsonData.character[0].experience;
+            charLevel = jsonData.character[0].level;
+            $("#gameLayout").show();
+            //$('#Display').html("stuff in div here");
         } else {
-            createNewChar();
+            $("#characterCreation").show();
         }
 
         //score = numberCorrect * pointMultiplier;
-        $('#scoreDisplay').html("Number of attempts on Level " + levelID + ": " + jsonData.score.length + ". Questions completed: " + questionsCompleted + ". Correct choices: " + numberCorrect + ". Your score: " + score);
+        
 
     });
 }
-function createNewChar() {
-    $.post("createChar.php").done(function (data) {
-
+function createNewChar(name, gender, agility, strength, intellect, wisdom, HP, MP, stamina, will) {
+    var charData = {};
+    charData.guid = guid();
+    charData.name = name;
+    charData.gender = gender;
+    charData.agility = agility;
+    charData.strength = strength;
+    charData.intellect = intellect;
+    charData.wisdom = wisdom;
+    charData.HP = HP;
+    charData.MP = MP;
+    charData.stamina = stamina;
+    charData.will = will;
+    $.post("createChar.php", charData).done(function(data){
+        console.log(data);
     });
 }
 
