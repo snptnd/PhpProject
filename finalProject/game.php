@@ -6,22 +6,22 @@ session_start();
 ?>
 <script>
     // Set aspect ratio of #my_div
-        var map_ratio = 0.75;
-        var message_ratio = 0.25;
-        var button_ratio = 0.20;
-        var multi_ratio = 2.5;
-        var hpMp_ratio = 0.10;
-        var will_ratio = 0.10;
-        var player_ratio = 1.301;
-        
-        var $map_div;
-        var $message_div;
-        var $button_div;
-        var $multi_div;
-        var $hpMp_div;
-        var $will_div;
-        var $player_div;
-    
+    var map_ratio = 0.75;
+    var message_ratio = 0.25;
+    var button_ratio = 0.20;
+    var multi_ratio = 2.5;
+    var hpMp_ratio = 0.10;
+    var will_ratio = 0.10;
+    var player_ratio = 1.301;
+
+    var $map_div;
+    var $message_div;
+    var $button_div;
+    var $multi_div;
+    var $hpMp_div;
+    var $will_div;
+    var $player_div;
+
     $(function () {
         var numAttempt = 0;
         var numA = 0;
@@ -39,7 +39,7 @@ session_start();
         });
 
 
-        
+
 
         // Store the jQuery object for future reference
         $map_div = jQuery("#mapScreen");
@@ -50,6 +50,8 @@ session_start();
         $will_div = jQuery(".willScreen");
         $player_div = jQuery(".playerScreen");
 
+
+
         // initial resize
         $(document).ready(function () {
             $map_div.height($map_div.width() * map_ratio);
@@ -59,9 +61,58 @@ session_start();
             $hpMp_div.height($hpMp_div.width() * hpMp_ratio);
             $will_div.height($will_div.width() * will_ratio);
             $player_div.height($player_div.width() * player_ratio);
+            
+            $("#statsBtn").click(function () {
+                $("#multiStats").show();
+                $("#multiInv").hide();
+                $("#multiEquip").hide();
+                $("#multiSkills").hide();
+                $("#multiPeople").hide();
+                $("#multiParty").hide();
+            });
+            $("#invBtn").click(function () {
+                $("#multiStats").hide();
+                $("#multiInv").show();
+                $("#multiEquip").hide();
+                $("#multiSkills").hide();
+                $("#multiPeople").hide();
+                $("#multiParty").hide();
+            });
+            $("#equipBtn").click(function () {
+                $("#multiStats").hide();
+                $("#multiInv").hide();
+                $("#multiEquip").show();
+                $("#multiSkills").hide();
+                $("#multiPeople").hide();
+                $("#multiParty").hide();
+            });
+            $("#skillsBtn").click(function () {
+                $("#multiStats").hide();
+                $("#multiInv").hide();
+                $("#multiEquip").hide();
+                $("#multiSkills").show();
+                $("#multiPeople").hide();
+                $("#multiParty").hide();
+            });
+            $("#peopleBtn").click(function () {
+                $("#multiStats").hide();
+                $("#multiInv").hide();
+                $("#multiEquip").hide();
+                $("#multiSkills").hide();
+                $("#multiPeople").show();
+                $("#multiParty").hide();
+            });
+            $("#partyBtn").click(function () {
+                $("#multiStats").hide();
+                $("#multiInv").hide();
+                $("#multiEquip").hide();
+                $("#multiSkills").hide();
+                $("#multiPeople").hide();
+                $("#multiParty").show();
+            });
 
-            //$("#loggedInContainer").hide();
-            //$("#gameLayout").hide();
+            $("#gameLayout").hide();
+            $("#loggedInContainer").hide();
         });
 
         $("#loginForm").submit(function () {

@@ -1,9 +1,11 @@
+var charID;
 var charPlaceID = '';
 var charName = '';
 var charGender = 'male';
 var charAgility = 0;
 var charStrength = 0;
 var charIntellect = 0;
+var charWisdom = 0;
 var charMaxHP = 10;
 var charCurHP = 10;
 var charMaxMP = 8;
@@ -15,12 +17,82 @@ var charCurWill = 0;
 var charExperience = 0;
 var charLevel = 1;
 
+var placeImage;
+var placeName;
+
+var itemArray;
+
+function initialSetup() {
+
+    
+
+    $(".mapScreen").css({"background-image": "url('./images/" + placeImage + "')",
+        "background-repeat": "no-repeat", "background-size": "cover"});
+    $(".hpMpScreen").text("HP: " + charCurHP + "/" + charMaxHP + " Stamina: " + charCurStamina + "/" + charMaxStamina);
+    $(".willScreen").text("MP: " + charCurMP + "/" + charMaxMP + " Will: " + charCurWill + "/" + charMaxWill);
+
+    $("#multiStats").html("<table class='statTbl'><tr><td colspan='2'>" + charName + "'s Stats</td></tr>" +
+            "<tr><td>Health: </td><td>" + charMaxHP + "</td></tr>" +
+            "<tr><td>MP: </td><td>" + charMaxMP + "</td></tr>" +
+            "<tr><td>Stamina: </td><td>" + charMaxStamina + "</td></tr>" +
+            "<tr><td>Will: </td><td>" + charMaxWill + "</td></tr>" +
+            "<tr><td>Agility: </td><td>" + charAgility + "</td></tr>" +
+            "<tr><td>Strength: </td><td>" + charStrength + "</td></tr>" +
+            "<tr><td>Intellect: </td><td>" + charIntellect + "</td></tr>" +
+            "<tr><td>Wisdom: </td><td>" + charWisdom + "</td></tr></table>");
+
+    $("#multiInv").append("<table><tr><td colspan='2'>Inventory</td></tr>");
+    $("#multiEquip").append("<table><tr><td colspan='2'>Equip</td></tr>");
+    for (var i = 0; i < itemArray.item.length; i++) {
+        var unequipButton = "<div class='unequipBtn'>Unequip</div>";
+        var equipButton = "<div class='equipBtn'>Equip</div>";
+
+        if (itemArray.item[i].isEquipped == 'true') {
+            $("#multiEquip").append("<tr><td>" + itemArray.item[i].itemName + "</td><td>" + unequipButton + "</td></tr>");
+        } else if (itemArray.item[i].type == 'clothing' || 'armor' || 'leather') {
+            $("#multiInv").append("<tr><td>" + itemArray.item[i].itemName + "</td><td>" + equipButton + "</td></tr>");
+        } else {
+            $("#multiInv").append("<tr><td>" + itemArray.item[i].itemName + "</td><td></td></tr>");
+        }
+    }
+    $("#multiInv").html("</table>");
+    $("#multiEquip").html("</table>");
+
+    $("#multiInv").hide();
+    $("#multiEquip").hide();
+    $("#multiSkills").hide();
+    $("#multiPeople").hide();
+    $("#multiParty").hide();
+
+}
+
+function findCurrentPlace() {
+    var placeData = {};
+    placeData.FK_placeID = charPlaceID;
+    $.post("findCurrentPlace.php", placeData).done(function (data) {
+        var jsonData = JSON.parse(data);
+        placeImage = jsonData.places[0].imageName;
+        placeName = jsonData.places[0].name;
+        initialSetup();
+    });
+}
+
+function findCharItems() {
+    var placeData = {};
+    placeData.characterID = charID;
+    $.post("findCharItems.php").done(function (data) {
+        itemArray = JSON.parse(data);
+        findCurrentPlace();
+    });
+}
+
 function findChar() {
     $.post("findChar.php").done(function (data) {
         var jsonData = JSON.parse(data);
         var charFound = jsonData.character.length;
         if (charFound > 0) {
-            charPlaceID = jsonData.character[0].placeID;
+            charID = jsonData.character[0].characterID;
+            charPlaceID = jsonData.character[0].FK_placeID;
             charName = jsonData.character[0].name;
             charGender = jsonData.character[0].gender;
             charAgility = jsonData.character[0].agility;
@@ -38,18 +110,20 @@ function findChar() {
             charExperience = jsonData.character[0].experience;
             charLevel = jsonData.character[0].level;
             $("#gameLayout").show();
-            //$('#Display').html("stuff in div here");
+            findCharItems();
+            //initialSetup();
         } else {
             $("#characterCreation").show();
         }
 
-        //score = numberCorrect * pointMultiplier;
-        
+
+
 
     });
 }
 function createNewChar(name, gender, agility, strength, intellect, wisdom, HP, MP, stamina, will) {
     var charData = {};
+    console.log("createNewChar(" + name + ", " + gender + ", " + agility + ", " + strength + ", " + intellect + ", " + wisdom + ", " + HP + ", " + MP + ", " + stamina + ", " + will + ")");
     charData.guid = guid();
     charData.name = name;
     charData.gender = gender;
@@ -61,8 +135,8 @@ function createNewChar(name, gender, agility, strength, intellect, wisdom, HP, M
     charData.MP = MP;
     charData.stamina = stamina;
     charData.will = will;
-    $.post("createChar.php", charData).done(function(data){
-        console.log(data);
+    $.post("createChar.php", charData).done(function (data) {
+
     });
 }
 

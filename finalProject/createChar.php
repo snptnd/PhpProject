@@ -19,7 +19,7 @@ $will = $_POST["will"];
 $sql = "INSERT INTO srp63.character";
 $sql .= "(characterID,FK_placeID,FK_userID,name,gender,agility,strength,";
 $sql .= "intellect,wisdom,maxHP,curHP,maxMP,curMP,maxStamina,curStamina,";
-$sql .= "maxWill,curWIll,experience,level) ";
+$sql .= "maxWill,curWill,experience,level) ";
 $sql .= "VALUES (?,'55a4ccfd-5c33-4ddc-9445-1a4af176099b',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,1);";
 
 $db = new DbUtilities;

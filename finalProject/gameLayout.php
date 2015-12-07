@@ -21,9 +21,14 @@
     }
 
     .multiScreen {
-        background-color: red;
-        box-shadow: 0 0 2px 2px black;
+        background-color: #2B1616;
+        box-shadow: inset 0px 0px 2px 5px #3A0909;
         margin: 5px 0 5px 0;
+    }
+
+    .statTbl{
+        width: 100%;
+        margin: 1vw;
     }
 
     .mapScreen {
@@ -47,13 +52,13 @@
     }
 
     .hpMpScreen {
-        font-size: 2.6vw;
+        font-size: 2.2vw;
         margin: 5px 0 5px 0;
         color: white;
     }
 
     .willScreen {
-        font-size: 2.6vw;
+        font-size: 2.2vw;
         margin: 5px 0 5px 0;
         color: white;
     }
@@ -80,7 +85,7 @@
         clear:both;
     }
     .g-col:active {
-        background-color: black;
+        background-color: black !important;
     }
     .g-col:hover {
         background-color: #8A3838;
@@ -104,33 +109,28 @@
     }
 </style>
 
-
-
-
-<script type="text/javascript">
-    
-
-
-
-</script>
-
 <div class="noWrap" id="gameLayout">
     <div class="col-xs-2 leftScreen">
         <div class="row buttonScreen g-table" style="height: 23.6px;">
             <div class="g-row">
-                <div class="g-col">Stats</div><div class="g-col">Inv</div><div class="g-col">Equip</div>
+                <div id="statsBtn" class="g-col">Stats</div><div id="invBtn" class="g-col">Inv</div><div id="equipBtn" class="g-col">Equip</div>
             </div>
             <div class="g-row">
-                <div class="g-col">Skills</div><div class="g-col">People</div><div class="g-col">Party</div>
+                <div id="skillsBtn" class="g-col">Skills</div><div id="peopleBtn" class="g-col">People</div><div id="partyBtn" class="g-col">Party</div>
             </div>
         </div>
         <div class="row multiScreen" style="height: 295px;">
-            multi pane
+            <div id="multiStats"></div>
+            <div id="multiInv"></div>
+            <div id="multiEquip"></div>
+            <div id="multiSkills"></div>
+            <div id="multiPeople"></div>
+            <div id="multiParty"></div>
         </div>
     </div>
     <div class="col-xs-6 middleScreen">
         <div class="row mapScreen" id="mapScreen" style="height: 280.5px;">
-            map
+
         </div>
         <div class="row messageScreen" style="height: 93.5px;">
             Necessary ye contented newspaper zealously breakfast he prevailed. Melancholy middletons yet understood decisively boy law she. Answer him easily are its barton little. Oh no though mother be things simple itself. Dashwood horrible he strictly on as. Home fine in so am.

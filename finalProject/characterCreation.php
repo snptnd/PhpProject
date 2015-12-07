@@ -261,7 +261,11 @@
             } else if (points != 0) {
                 alert("You must alocate all of your points to continue!");
             } else {
-                createNewChar();
+                createNewChar($("#charName").val(), gender, 
+                $("#agilityPoints").text(), $("#strengthPoints").text(), 
+                $("#intellectPoints").text(), $("#wisdomPoints").text(), 
+                $("#hpPoints").text(), $("#mpPoints").text(), 
+                $("#staminaPoints").text(), $("#willPoints").text());
                 $("#characterCreation").hide();
                 findChar();
             }
