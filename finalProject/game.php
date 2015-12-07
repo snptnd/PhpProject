@@ -61,7 +61,7 @@ session_start();
             $hpMp_div.height($hpMp_div.width() * hpMp_ratio);
             $will_div.height($will_div.width() * will_ratio);
             $player_div.height($player_div.width() * player_ratio);
-            
+
             $("#statsBtn").click(function () {
                 $("#multiStats").show();
                 $("#multiInv").hide();
@@ -110,6 +110,14 @@ session_start();
                 $("#multiPeople").hide();
                 $("#multiParty").show();
             });
+
+            
+
+            $("#multiInv").hide();
+            $("#multiEquip").hide();
+            $("#multiSkills").hide();
+            $("#multiPeople").hide();
+            $("#multiParty").hide();
 
             $("#gameLayout").hide();
             $("#loggedInContainer").hide();

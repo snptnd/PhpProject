@@ -16,6 +16,7 @@ var charMaxWill = 0;
 var charCurWill = 0;
 var charExperience = 0;
 var charLevel = 1;
+var curItemID;
 
 var placeImage;
 var placeName;
@@ -23,8 +24,6 @@ var placeName;
 var itemArray;
 
 function initialSetup() {
-
-    
 
     $(".mapScreen").css({"background-image": "url('./images/" + placeImage + "')",
         "background-repeat": "no-repeat", "background-size": "cover"});
@@ -41,29 +40,51 @@ function initialSetup() {
             "<tr><td>Intellect: </td><td>" + charIntellect + "</td></tr>" +
             "<tr><td>Wisdom: </td><td>" + charWisdom + "</td></tr></table>");
 
+    $("#multiInv").html("");
+    $("#multiEquip").html("");
     $("#multiInv").append("<table><tr><td colspan='2'>Inventory</td></tr>");
     $("#multiEquip").append("<table><tr><td colspan='2'>Equip</td></tr>");
     for (var i = 0; i < itemArray.item.length; i++) {
-        var unequipButton = "<div class='unequipBtn'>Unequip</div>";
-        var equipButton = "<div class='equipBtn'>Equip</div>";
-
+        
+        curItemID = itemArray.item[i].itemID;
+        var unequipButton = "<div id='" + curItemID + "' class='unequipBtn'>Unequip</div>";
+        var equipButton = "<div id='" + curItemID + "' class='equipBtn'>Equip</div>";
+        
         if (itemArray.item[i].isEquipped == 'true') {
-            $("#multiEquip").append("<tr><td>" + itemArray.item[i].itemName + "</td><td>" + unequipButton + "</td></tr>");
-        } else if (itemArray.item[i].type == 'clothing' || 'armor' || 'leather') {
-            $("#multiInv").append("<tr><td>" + itemArray.item[i].itemName + "</td><td>" + equipButton + "</td></tr>");
+            $("#multiEquip").append("<tr class='itemLine'><td style='font-size: 1vw;'>" +
+                    itemArray.item[i].itemName + "</td><td style='font-size: 1vw;padding-left: 1vw; color: blue; cursor: pointer;'>" +
+                    unequipButton + "</td></tr>");
+            var unequip = "#" + curItemID;
+            $(unequip).click(function () {
+                unequipItem("false", $(unequip).attr('id'));
+            });
+
+        } else if (itemArray.item[i].type == 'clothing' || 'armor' || 'leather' || 'sword' || 'dagger' || 'weapon') {
+            $("#multiInv").append("<tr class='itemLine'><td style='font-size: 1vw;'>" + itemArray.item[i].itemName +
+                    "</td><td style='font-size: 1vw;padding-left: 1vw; color: blue; cursor: pointer;'>" +
+                    equipButton + "</td></tr>");
+            var equip = "#" + curItemID;
+            $(equip).click(function () {
+                unequipItem("true", $(equip).attr('id'));
+            });
+
         } else {
-            $("#multiInv").append("<tr><td>" + itemArray.item[i].itemName + "</td><td></td></tr>");
+            $("#multiInv").append("<tr class='itemLine'><td style='font-size: 1vw;'>" +
+                    itemArray.item[i].itemName + "</td><td></td></tr>");
         }
     }
-    $("#multiInv").html("</table>");
-    $("#multiEquip").html("</table>");
+    $("#multiInv").append("</table>");
+    $("#multiEquip").append("</table>");
 
-    $("#multiInv").hide();
-    $("#multiEquip").hide();
-    $("#multiSkills").hide();
-    $("#multiPeople").hide();
-    $("#multiParty").hide();
+}
 
+function unequipItem(isEquipped, itemID) {
+    var itemData = {};
+    itemData.itemID = itemID;
+    itemData.isEquipped = isEquipped;
+    $.post("unequipItem.php", itemData).done(function (data) {
+        findCharItems();
+    });
 }
 
 function findCurrentPlace() {
@@ -78,9 +99,9 @@ function findCurrentPlace() {
 }
 
 function findCharItems() {
-    var placeData = {};
-    placeData.characterID = charID;
-    $.post("findCharItems.php").done(function (data) {
+    var charData = {};
+    charData.characterID = charID;
+    $.post("findCharItems.php", charData).done(function (data) {
         itemArray = JSON.parse(data);
         findCurrentPlace();
     });
@@ -123,8 +144,12 @@ function findChar() {
 }
 function createNewChar(name, gender, agility, strength, intellect, wisdom, HP, MP, stamina, will) {
     var charData = {};
-    console.log("createNewChar(" + name + ", " + gender + ", " + agility + ", " + strength + ", " + intellect + ", " + wisdom + ", " + HP + ", " + MP + ", " + stamina + ", " + will + ")");
     charData.guid = guid();
+    charData.item1ID = guid();
+    charData.item2ID = guid();
+    charData.item3ID = guid();
+    charData.item4ID = guid();
+    charData.item5ID = guid();
     charData.name = name;
     charData.gender = gender;
     charData.agility = agility;
@@ -136,7 +161,6 @@ function createNewChar(name, gender, agility, strength, intellect, wisdom, HP, M
     charData.stamina = stamina;
     charData.will = will;
     $.post("createChar.php", charData).done(function (data) {
-
     });
 }
 
