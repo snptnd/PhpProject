@@ -21,6 +21,8 @@ session_start();
     var $hpMp_div;
     var $will_div;
     var $player_div;
+    
+    //insertPoint();
 
     $(function () {
         var numAttempt = 0;
@@ -112,6 +114,10 @@ session_start();
             });
 
             
+            $(".messageScreen").click(function () {
+                $(".messageScreen").html("");
+            });
+            
 
             $("#multiInv").hide();
             $("#multiEquip").hide();
@@ -122,6 +128,8 @@ session_start();
             $("#gameLayout").hide();
             $("#loggedInContainer").hide();
         });
+        
+        
 
         $("#loginForm").submit(function () {
             var errors = 0;
